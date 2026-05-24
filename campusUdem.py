@@ -1,6 +1,5 @@
 import heapq
 from typing import Any, List, Dict, Tuple
-
 from claseBase import GrafoLista
 
 class CampusUdeM(GrafoLista):
