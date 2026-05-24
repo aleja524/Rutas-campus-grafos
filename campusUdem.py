@@ -1,6 +1,5 @@
 import heapq
-from typing import Any, List, Dict, Tuple
-from claseBase import GrafoLista
+from typing import Any, List, Tuple
 from claseBase import GrafoLista, campus
 
 class CampusUdeM(GrafoLista):
@@ -45,6 +44,31 @@ class CampusUdeM(GrafoLista):
                 cola_caminos.append([costo_nuevo, vecino, nueva_ruta])
 
         return [], float('inf')
+    
+    def explicar_ruta(self, camino: List[Any], costo: float, criterio: str, solo_accesible: bool = False) -> str:
+        if not camino:
+            return ("No se encontró una ruta válida. Puede que el destino no exista, "
+                    "que todos los caminos estén bloqueados o en mantenimiento, "
+                    "o que no haya rutas accesibles disponibles.")
+        
+        unidades = {
+            "distancia": "metros",
+            "tiempo": "minutos",
+            "congestion": "puntos de congestión"
+        }
+        unidad = unidades.get(criterio, "unidades")
+        
+        explicacion = (
+            f"Se eligió esta ruta porque minimiza el criterio '{criterio}' "
+            f"con un costo total de {costo} {unidad}. "
+            f"El recorrido pasa por {len(camino)} lugares e ignora caminos "
+            f"en estado 'bloqueado' o 'mantenimiento'."
+        )
+        
+        if solo_accesible:
+            explicacion += " Además, solo considera caminos accesibles para personas con movilidad reducida."
+        
+        return explicacion
     
     def prim_mst(self) -> Tuple[List[Tuple[Any, Any, float]], float]:
         if not self.listaAdy:
@@ -97,28 +121,42 @@ print("=========================================================\n")
 
 print("--- 1. Buscando la ruta más corta (Criterio: distancia) ---")
 camino_corto, costo_distancia = mi_campus_optimizado.dijkstra_personalizado(
-    inicio="Entrada principal", 
-    fin="Bloque 4 - ingenierias", 
+    inicio="Entrada principal",
+    fin="Bloque 4 - ingenierias",
     criterio="distancia"
 )
 print(f"Ruta óptima: {camino_corto}")
-print(f"Distancia total: {costo_distancia} metros.\n")
-
+print(f"Distancia total: {costo_distancia} metros.")
+print(mi_campus_optimizado.explicar_ruta(camino_corto, costo_distancia, "distancia"))
+print()
 
 print("--- 2. Buscando la ruta más rápida y accesible (Movilidad Reducida) ---")
 camino_rapido, costo_tiempo = mi_campus_optimizado.dijkstra_personalizado(
-    inicio="Entrada principal", 
-    fin="Bloque 3 - laboratorios", 
-    criterio="tiempo", 
+    inicio="Entrada principal",
+    fin="Bloque 3 - laboratorios",
+    criterio="tiempo",
     solo_accesible=True
 )
-
 print(f"Ruta óptima accesible: {camino_rapido}")
-print(f"Tiempo estimado: {costo_tiempo} minutos.\n")
+print(f"Tiempo estimado: {costo_tiempo} minutos.")
+print(mi_campus_optimizado.explicar_ruta(camino_rapido, costo_tiempo, "tiempo", solo_accesible=True))
+print()
+
 print("--- 3. Generando Tour del Campus para Visitantes (Prim MST) ---")
 caminos_tour, distancia_tour = mi_campus_optimizado.prim_mst()
 print(f"Distancia mínima total para conectar todo el campus: {distancia_tour} metros.")
 print("Caminos sugeridos para el recorrido sin repetir lugares:")
 for origen, destino, metros in caminos_tour:
     print(f"  • De [{origen}] hacia [{destino}] recorriendo {metros}m")
+print()
+
+print("--- 4. Buscando la ruta con menor congestión ---")
+camino_calmo, costo_congestion = mi_campus_optimizado.dijkstra_personalizado(
+    inicio="Entrada principal",
+    fin="Bloque 7 - ciencias economicas",
+    criterio="congestion"
+)
+print(f"Ruta menos congestionada: {camino_calmo}")
+print(f"Congestión total: {costo_congestion}")
+print(mi_campus_optimizado.explicar_ruta(camino_calmo, costo_congestion, "congestion"))
 print("=========================================================")
