@@ -1,6 +1,7 @@
 import heapq
 from typing import Any, List, Dict, Tuple
 from claseBase import GrafoLista
+from claseBase import GrafoLista, campus
 
 class CampusUdeM(GrafoLista):
     def __init__(self):
@@ -84,3 +85,40 @@ class CampusUdeM(GrafoLista):
             distancia_total += menor_distancia
 
         return caminos_elegidos, distancia_total
+
+
+mi_campus_optimizado = CampusUdeM()
+mi_campus_optimizado.listaAdy = campus.listaAdy
+mi_campus_optimizado.tamano = campus.tamano
+
+print("\n=========================================================")
+print("          PRUEBAS DE OPTIMIZACIÓN DE RECORRIDOS          ")
+print("=========================================================\n")
+
+print("--- 1. Buscando la ruta más corta (Criterio: distancia) ---")
+camino_corto, costo_distancia = mi_campus_optimizado.dijkstra_personalizado(
+    inicio="Entrada principal", 
+    fin="Bloque 4 - ingenierias", 
+    criterio="distancia"
+)
+print(f"Ruta óptima: {camino_corto}")
+print(f"Distancia total: {costo_distancia} metros.\n")
+
+
+print("--- 2. Buscando la ruta más rápida y accesible (Movilidad Reducida) ---")
+camino_rapido, costo_tiempo = mi_campus_optimizado.dijkstra_personalizado(
+    inicio="Entrada principal", 
+    fin="Bloque 3 - laboratorios", 
+    criterio="tiempo", 
+    solo_accesible=True
+)
+
+print(f"Ruta óptima accesible: {camino_rapido}")
+print(f"Tiempo estimado: {costo_tiempo} minutos.\n")
+print("--- 3. Generando Tour del Campus para Visitantes (Prim MST) ---")
+caminos_tour, distancia_tour = mi_campus_optimizado.prim_mst()
+print(f"Distancia mínima total para conectar todo el campus: {distancia_tour} metros.")
+print("Caminos sugeridos para el recorrido sin repetir lugares:")
+for origen, destino, metros in caminos_tour:
+    print(f"  • De [{origen}] hacia [{destino}] recorriendo {metros}m")
+print("=========================================================")
