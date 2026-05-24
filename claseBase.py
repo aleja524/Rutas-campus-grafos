@@ -88,7 +88,6 @@ campus.agregarVertice("Bloque 12 - computacion")
 campus.agregarVertice("Biblioteca")
 campus.agregarVertice("Bloque 13 - derecho")
 
-# 2. CORRECCIÓN: Cambiamos 'peso=' por 'atributos=' en todas las conexiones
 campus.agregarConexion("Entrada principal", "Bloque 1 - coliseo",
     atributos={"distancia": 150, "tiempo": 2, "congestion": 3, "accesible": True, "estado": "disponible"})
 
