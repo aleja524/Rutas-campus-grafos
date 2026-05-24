@@ -52,7 +52,7 @@ class GrafoLista:
             vertice = cola.popleft()
             if vertice not in visitados:
                 visitados.append(vertice)
-                for vecino, peso in self.listaAdy[vertice]:
+                for vecino, _ in self.listaAdy[vertice]:
                     if vecino not in visitados:
                         cola.append(vecino)
         return visitados   
@@ -66,11 +66,11 @@ class GrafoLista:
             vertice = pila.pop()
             if vertice not in visitados:
                 visitados.append(vertice)
-                for vecino, peso in self.listaAdy[vertice]:
+                for vecino, _ in self.listaAdy[vertice]:
                     if vecino not in visitados:
                         pila.append(vecino)
         return visitados
-    
+
 campus = GrafoLista()
 campus.agregarVertice("Entrada principal")
 campus.agregarVertice("Bloque 1 - coliseo")
@@ -88,62 +88,77 @@ campus.agregarVertice("Bloque 12 - computacion")
 campus.agregarVertice("Biblioteca")
 campus.agregarVertice("Bloque 13 - derecho")
 
+# 2. CORRECCIÓN: Cambiamos 'peso=' por 'atributos=' en todas las conexiones
 campus.agregarConexion("Entrada principal", "Bloque 1 - coliseo",
-    peso={"distancia": 150, "tiempo": 2, "congestion": 3, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 150, "tiempo": 2, "congestion": 3, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Entrada principal", "Biblioteca",
-    peso={"distancia": 120, "tiempo": 2, "congestion": 2, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 120, "tiempo": 2, "congestion": 2, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Entrada principal", "Bloque 13 - derecho",
-    peso={"distancia": 90, "tiempo": 1, "congestion": 1, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 90, "tiempo": 1, "congestion": 1, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 1 - coliseo", "Cancha principal",
-    peso={"distancia": 80, "tiempo": 1, "congestion": 2, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 80, "tiempo": 1, "congestion": 2, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 1 - coliseo", "Bloque 2 - artes",
-    peso={"distancia": 200, "tiempo": 3, "congestion": 4, "accesible": False, "estado": "disponible"})
+    atributos={"distancia": 200, "tiempo": 3, "congestion": 4, "accesible": False, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 2 - artes", "Bloque 3 - laboratorios",
-    peso={"distancia": 110, "tiempo": 2, "congestion": 2, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 110, "tiempo": 2, "congestion": 2, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 2 - artes", "Centro idiomas",
-    peso={"distancia": 170, "tiempo": 3, "congestion": 3, "accesible": True, "estado": "mantenimiento"})
+    atributos={"distancia": 170, "tiempo": 3, "congestion": 3, "accesible": True, "estado": "mantenimiento"})
 
 campus.agregarConexion("Bloque 3 - laboratorios", "Bloque 4 - ingenierias",
-    peso={"distancia": 95, "tiempo": 1, "congestion": 3, "accesible": False, "estado": "disponible"})
+    atributos={"distancia": 95, "tiempo": 1, "congestion": 3, "accesible": False, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 3 - laboratorios", "Bloque 5 - ciencias basicas",
-    peso={"distancia": 130, "tiempo": 2, "congestion": 2, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 130, "tiempo": 2, "congestion": 2, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 4 - ingenierias", "Bloque 12 - computacion",
-    peso={"distancia": 60, "tiempo": 1, "congestion": 4, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 60, "tiempo": 1, "congestion": 4, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 4 - ingenierias", "Bloque 5 - ciencias basicas",
-    peso={"distancia": 100, "tiempo": 2, "congestion": 2, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 100, "tiempo": 2, "congestion": 2, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 5 - ciencias basicas", "Bloque 7 - ciencias economicas",
-    peso={"distancia": 180, "tiempo": 3, "congestion": 3, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 180, "tiempo": 3, "congestion": 3, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 7 - ciencias economicas", "Bloque 11 - posgrados",
-    peso={"distancia": 140, "tiempo": 2, "congestion": 2, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 140, "tiempo": 2, "congestion": 2, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 7 - ciencias economicas", "Centro idiomas",
-    peso={"distancia": 160, "tiempo": 2, "congestion": 1, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 160, "tiempo": 2, "congestion": 1, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 9 - audiovisuales", "Bloque 10 - comunicacion",
-    peso={"distancia": 70, "tiempo": 1, "congestion": 2, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 70, "tiempo": 1, "congestion": 2, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 10 - comunicacion", "Bloque 11 - posgrados",
-    peso={"distancia": 120, "tiempo": 2, "congestion": 1, "accesible": True, "estado": "bloqueado"})
+    atributos={"distancia": 120, "tiempo": 2, "congestion": 1, "accesible": True, "estado": "bloqueado"})
 
 campus.agregarConexion("Bloque 11 - posgrados", "Bloque 12 - computacion",
-    peso={"distancia": 90, "tiempo": 1, "congestion": 2, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 90, "tiempo": 1, "congestion": 2, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 12 - computacion", "Biblioteca",
-    peso={"distancia": 110, "tiempo": 2, "congestion": 3, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 110, "tiempo": 2, "congestion": 3, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Biblioteca", "Bloque 13 - derecho",
-    peso={"distancia": 85, "tiempo": 1, "congestion": 1, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 85, "tiempo": 1, "congestion": 1, "accesible": True, "estado": "disponible"})
 
 campus.agregarConexion("Bloque 9 - audiovisuales", "Bloque 13 - derecho",
-    peso={"distancia": 200, "tiempo": 3, "congestion": 2, "accesible": True, "estado": "disponible"})
+    atributos={"distancia": 200, "tiempo": 3, "congestion": 2, "accesible": True, "estado": "disponible"})
+
+
+print("¡El grafo del campus se cargó correctamente!")
+print(f"Cantidad de lugares registrados: {campus.tamano}\n")
+
+
+print("--- Recorrido en Anchura (BFS) desde la Entrada ---")
+ruta_bfs = campus.recorrerEnAnchura("Entrada principal")
+print(ruta_bfs)
+print("\n")
+
+print("--- Recorrido en Profundidad (DFS) desde la Entrada ---")
+ruta_dfs = campus.recorrerEnProfundidad("Entrada principal")
+print(ruta_dfs)
