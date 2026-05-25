@@ -16,3 +16,15 @@ El campus se representa como un grafo no dirigido donde cada *vértice* es un lu
 - *Nivel de congestión* (escala numérica)
 - *Accesibilidad* para personas con movilidad reducida (booleano)
 - *Estado* del camino: disponible, bloqueado o mantenimiento
+
+El sistema implementa:
+
+1. *Dijkstra personalizado*: encuentra la mejor ruta entre dos lugares según el criterio elegido (distancia, tiempo o congestión), con opción de filtrar solo caminos accesibles. Ignora automáticamente caminos en estado bloqueado o mantenimiento.
+2. *Prim (Árbol de Expansión Mínima)*: genera un recorrido turístico que conecta todos los lugares del campus minimizando la distancia total, sin repetir lugares.
+3. *Explicación de la ruta*: cada ruta calculada incluye una explicación textual del por qué fue seleccionada.
+4. *BFS y DFS*: recorridos en anchura y profundidad desde un nodo inicial (heredados de la clase base).
+
+
+|---claseBase.py (clase grafo lista y construccion del grafo del campus)
+|---campusUdem.py (clase campusUdeM con dijkstra, prim y explicar ruta)
+|---Readme.md 
