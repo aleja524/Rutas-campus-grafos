@@ -3,6 +3,7 @@ Sistema que ayuda a estudiantes, docentes y visitantes a encontrar rutas eficien
 
 ## Autores:
 Alejandra Escobar - Camila Villero
+
 Universidad de Medellin - Estructura de datos
 
 
